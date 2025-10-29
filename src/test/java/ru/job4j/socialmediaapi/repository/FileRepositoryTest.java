@@ -17,9 +17,12 @@ import static org.assertj.core.api.Assertions.*;
 class FileRepositoryTest {
     @Autowired
     private FileRepository fileRepository;
+    @Autowired
+    private PostRepository postRepository;
 
     @BeforeEach
     public void cleanDb() {
+        postRepository.deleteAll();
         fileRepository.deleteAll();
     }
 
