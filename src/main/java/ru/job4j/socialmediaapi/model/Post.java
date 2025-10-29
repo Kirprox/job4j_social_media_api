@@ -20,9 +20,9 @@ public class Post {
     private String text;
     private LocalDateTime created;
     @ManyToOne
-    @JoinColumn(name = "user_id") // foreign key
+    @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne
     @JoinColumn(name = "file_id")
-    private Files file;
+    private File file;
 }
