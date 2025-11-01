@@ -22,12 +22,24 @@ class SubscriberRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PostRepository postRepository;
+
+    @Autowired
+    private FriendRepository friendRepository;
+
+    @Autowired
+    private FileRepository fileRepository;
+
     private User u1;
     private User u2;
 
     @BeforeEach
     public void setupDb() {
+        postRepository.deleteAll();
+        friendRepository.deleteAll();
         subscriberRepository.deleteAll();
+        fileRepository.deleteAll();
         userRepository.deleteAll();
 
         u1 = new User();

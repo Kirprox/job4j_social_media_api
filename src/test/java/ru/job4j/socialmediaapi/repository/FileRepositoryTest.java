@@ -19,11 +19,22 @@ class FileRepositoryTest {
     private FileRepository fileRepository;
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private FriendRepository friendRepository;
+
+    @Autowired
+    private SubscriberRepository subscriberRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @BeforeEach
     public void cleanDb() {
         postRepository.deleteAll();
+        friendRepository.deleteAll();
+        subscriberRepository.deleteAll();
         fileRepository.deleteAll();
+        userRepository.deleteAll();
     }
 
     @Test

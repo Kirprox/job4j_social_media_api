@@ -26,12 +26,20 @@ class PostRepositoryTest {
     @Autowired
     private FileRepository fileRepository;
 
+    @Autowired
+    private FriendRepository friendRepository;
+
+    @Autowired
+    private SubscriberRepository subscriberRepository;
+
     private User user;
     private File file;
 
     @BeforeEach
     public void setupDb() {
         postRepository.deleteAll();
+        friendRepository.deleteAll();
+        subscriberRepository.deleteAll();
         fileRepository.deleteAll();
         userRepository.deleteAll();
 

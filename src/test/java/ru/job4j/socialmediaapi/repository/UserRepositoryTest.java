@@ -18,8 +18,24 @@ class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private FriendRepository friendRepository;
+
+    @Autowired
+    private PostRepository postRepository;
+
+    @Autowired
+    private SubscriberRepository subscriberRepository;
+
+    @Autowired
+    private FileRepository fileRepository;
+
     @BeforeEach
     public void cleanDb() {
+        postRepository.deleteAll();
+        friendRepository.deleteAll();
+        subscriberRepository.deleteAll();
+        fileRepository.deleteAll();
         userRepository.deleteAll();
     }
 
