@@ -45,7 +45,7 @@ class SubscriberRepositoryTest {
     }
 
     @Test
-    public void whenSaveSubscriber_thenFindById() {
+    public void whenSaveSubscriberThenFindById() {
         var sub = new Subscriber();
         sub.setSubscriber(u1);
         sub.setSubscribedTo(u2);
@@ -59,7 +59,7 @@ class SubscriberRepositoryTest {
     }
 
     @Test
-    public void whenSaveSubscriber_thenUpdateSubscriberHasSameId() {
+    public void whenSaveSubscriberThenUpdateSubscriberHasSameId() {
         var sub = new Subscriber();
         sub.setSubscriber(u1);
         sub.setSubscribedTo(u2);
@@ -75,7 +75,7 @@ class SubscriberRepositoryTest {
     }
 
     @Test
-    public void whenFindAll_thenReturnAllSubscribers() {
+    public void whenFindAllThenReturnAllSubscribers() {
         var s1 = new Subscriber(null, u1, u2, LocalDateTime.now());
         var s2 = new Subscriber(null, u2, u1, LocalDateTime.now());
         subscriberRepository.save(s1);

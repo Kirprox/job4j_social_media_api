@@ -26,7 +26,7 @@ class FriendRepositoryTest {
     }
 
     @Test
-    public void whenSaveFriend_thenFindById() {
+    public void whenSaveFriendThenFindById() {
         var friend = new Friend();
         friend.setUser1Id(1);
         friend.setUser2Id(2);
@@ -39,7 +39,7 @@ class FriendRepositoryTest {
     }
 
     @Test
-    public void whenSaveFriend_thenUpdateFriendHasSameId() {
+    public void whenSaveFriendThenUpdateFriendHasSameId() {
         var friend = new Friend();
         friend.setUser1Id(1);
         friend.setUser2Id(2);
@@ -53,7 +53,7 @@ class FriendRepositoryTest {
     }
 
     @Test
-    public void whenFindAll_thenReturnAllFriends() {
+    public void whenFindAllThenReturnAllFriends() {
         var f1 = new Friend(null, 1, 2, LocalDateTime.now());
         var f2 = new Friend(null, 2, 3, LocalDateTime.now());
         friendRepository.save(f1);

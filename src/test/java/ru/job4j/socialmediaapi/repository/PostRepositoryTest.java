@@ -48,7 +48,7 @@ class PostRepositoryTest {
     }
 
     @Test
-    public void whenSavePost_thenFindById() {
+    public void whenSavePostThenFindById() {
         var post = new Post();
         post.setTitle("Title1");
         post.setText("Text1");
@@ -65,7 +65,7 @@ class PostRepositoryTest {
     }
 
     @Test
-    public void whenSavePost_thenUpdatePostHasSameId() {
+    public void whenSavePostThenUpdatePostHasSameId() {
         var post = new Post();
         post.setTitle("Title1");
         post.setText("Text1");
@@ -83,7 +83,7 @@ class PostRepositoryTest {
     }
 
     @Test
-    public void whenFindAll_thenReturnAllPosts() {
+    public void whenFindAllThenReturnAllPosts() {
         var p1 = new Post(null, "Title1", "Text1", LocalDateTime.now(), user, file);
         var p2 = new Post(null, "Title2", "Text2", LocalDateTime.now(), user, file);
         postRepository.save(p1);

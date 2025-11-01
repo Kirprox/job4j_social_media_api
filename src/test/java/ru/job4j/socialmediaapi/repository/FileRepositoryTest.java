@@ -27,7 +27,7 @@ class FileRepositoryTest {
     }
 
     @Test
-    public void whenSaveFile_thenFindById() {
+    public void whenSaveFileThenFindById() {
         var file = new File();
         file.setName("picture1");
         file.setPath("/one");
@@ -38,7 +38,7 @@ class FileRepositoryTest {
     }
 
     @Test
-    public void whenSaveFile_thenUpdateFileHasSameFile() {
+    public void whenSaveFileThenUpdateFileHasSameFile() {
         var file = new File();
         file.setName("picture1");
         file.setPath("/one");
@@ -51,7 +51,7 @@ class FileRepositoryTest {
     }
 
     @Test
-    public void whenFindAll_thenReturnAllFiles() {
+    public void whenFindAllThenReturnAllFiles() {
         var file1 = new File();
         file1.setName("picture1");
         file1.setPath("/one");

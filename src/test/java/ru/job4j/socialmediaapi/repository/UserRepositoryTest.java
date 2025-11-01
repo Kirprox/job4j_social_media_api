@@ -24,7 +24,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    public void whenSaveUser_thenFindById() {
+    public void whenSaveUserThenFindById() {
         var user = new User();
         user.setFullName("John Doe");
         user.setEmail("john@example.com");
@@ -39,7 +39,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    public void whenSaveUser_thenUpdateUserHasSameId() {
+    public void whenSaveUserThenUpdateUserHasSameId() {
         var user = new User();
         user.setFullName("Alice");
         user.setEmail("alice@example.com");
@@ -55,7 +55,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    public void whenFindAll_thenReturnAllUsers() {
+    public void whenFindAllThenReturnAllUsers() {
         var u1 = new User();
         u1.setFullName("User1");
         u1.setEmail("u1@example.com");

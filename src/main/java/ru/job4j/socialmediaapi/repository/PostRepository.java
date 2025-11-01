@@ -11,6 +11,8 @@ import java.util.List;
 
 public interface PostRepository extends CrudRepository<Post, Long> {
     List<Post> findByUser(User user);
+
     List<Post> findByCreatedBetween(LocalDateTime start, LocalDateTime end);
+
     Page<Post> findAll(Pageable pageable);
 }
