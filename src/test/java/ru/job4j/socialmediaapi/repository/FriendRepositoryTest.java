@@ -76,32 +76,32 @@ class FriendRepositoryTest {
     @Test
     public void whenSaveFriendThenFindById() {
         var friend = new Friend();
-        friend.setUser1(user1);
-        friend.setUser2(user2);
+        friend.setUserA(user1);
+        friend.setUserB(user2);
         friend.setCreatedAt(LocalDateTime.now());
         friendRepository.save(friend);
 
         var found = friendRepository.findById(friend.getId());
         assertThat(found).isPresent();
-        assertThat(found.get().getUser1().getId()).isEqualTo(user1.getId());
-        assertThat(found.get().getUser2().getId()).isEqualTo(user2.getId());
+        assertThat(found.get().getUserA().getId()).isEqualTo(user1.getId());
+        assertThat(found.get().getUserB().getId()).isEqualTo(user2.getId());
     }
 
     @Test
     public void whenSaveFriendThenUpdateFriendHasSameId() {
         var friend = new Friend();
-        friend.setUser1(user1);
-        friend.setUser2(user2);
+        friend.setUserA(user1);
+        friend.setUserB(user2);
         friend.setCreatedAt(LocalDateTime.now());
         friendRepository.save(friend);
 
         // обновляем user2
-        friend.setUser2(user3);
+        friend.setUserB(user3);
         friendRepository.save(friend);
 
         var found = friendRepository.findById(friend.getId());
         assertThat(found).isPresent();
-        assertThat(found.get().getUser2().getId()).isEqualTo(user3.getId());
+        assertThat(found.get().getUserB().getId()).isEqualTo(user3.getId());
     }
 
     @Test
@@ -114,7 +114,7 @@ class FriendRepositoryTest {
         var friends = friendRepository.findAll();
         assertThat(friends).hasSize(2);
         assertThat(friends)
-                .extracting(f -> f.getUser2().getId())
+                .extracting(f -> f.getUserB().getId())
                 .contains(user2.getId(), user3.getId());
     }
 }

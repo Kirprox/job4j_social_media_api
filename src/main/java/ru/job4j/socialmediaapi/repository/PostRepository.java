@@ -11,6 +11,7 @@ import ru.job4j.socialmediaapi.model.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface PostRepository extends CrudRepository<Post, Long> {
     List<Post> findByUser(User user);
@@ -18,6 +19,8 @@ public interface PostRepository extends CrudRepository<Post, Long> {
     List<Post> findByCreatedBetween(LocalDateTime start, LocalDateTime end);
 
     Page<Post> findAll(Pageable pageable);
+
+    Optional<Post> findById(Long id);
 
     @Modifying(clearAutomatically = true)
     @Query("""
@@ -48,5 +51,5 @@ public interface PostRepository extends CrudRepository<Post, Long> {
                 WHERE sub.subscribedTo = :id
                 )
             ORDER BY post.created DESC""")
-    Page<Post> findPostsOfSubscriptions(@Param("id")Long userId, Pageable pageable);
+    Page<Post> findPostsOfSubscriptions(@Param("id") Long userId, Pageable pageable);
 }

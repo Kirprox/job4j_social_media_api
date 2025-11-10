@@ -10,7 +10,6 @@ import ru.job4j.socialmediaapi.model.File;
 
 
 import static org.assertj.core.api.Assertions.*;
-
 @SpringBootTest
 @ActiveProfiles("test")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

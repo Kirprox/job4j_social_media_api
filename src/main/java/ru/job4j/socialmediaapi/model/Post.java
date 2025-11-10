@@ -22,7 +22,15 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "file_id")
     private File file;
+
+    public Post(String title, String text, LocalDateTime created, User user, File file) {
+        this.title = title;
+        this.text = text;
+        this.created = created;
+        this.user = user;
+        this.file = file;
+    }
 }

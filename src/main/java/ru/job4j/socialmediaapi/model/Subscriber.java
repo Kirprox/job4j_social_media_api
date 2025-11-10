@@ -23,4 +23,10 @@ public class Subscriber {
     @JoinColumn(name = "subscriber_to_id")
     private User subscribedTo;
     private LocalDateTime createdAt;
+
+    public Subscriber(User subscriber, User subscribedTo, LocalDateTime createdAt) {
+        this.subscriber = subscriber;
+        this.subscribedTo = subscribedTo;
+        this.createdAt = createdAt;
+    }
 }

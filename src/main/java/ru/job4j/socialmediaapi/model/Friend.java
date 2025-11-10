@@ -18,10 +18,16 @@ public class Friend {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "user1_id")
-    private User user1;
+    private User userA;
 
     @ManyToOne
     @JoinColumn(name = "user2_id")
-    private User user2;
+    private User userB;
     private LocalDateTime createdAt;
+
+    public Friend(User userA, User userB, LocalDateTime createdAt) {
+        this.userA = userA;
+        this.userB = userB;
+        this.createdAt = createdAt;
+    }
 }
