@@ -1,0 +1,81 @@
+package ru.job4j.socialmediaapi.controller;
+
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import ru.job4j.socialmediaapi.model.User;
+import ru.job4j.socialmediaapi.service.UserService;
+
+import java.util.Optional;
+
+@Validated
+@Slf4j
+@AllArgsConstructor
+@RestController
+@RequestMapping("/api/user")
+public class UserController {
+    private final UserService userService;
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<User> get(@PathVariable("userId")
+                                    @NotNull
+                                    @Min(value = 1, message = "номер ресурса должен быть 1 и более")
+                                    Long userId) {
+        return userService.findById(userId)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<User> save(@RequestBody User user) {
+        userService.save(user);
+        var uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(user.getId())
+                .toUri();
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .location(uri)
+                .body(user);
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> update(@RequestBody User user) {
+        ResponseEntity<Void> response;
+
+        if (user.getId() == null) {
+            response = ResponseEntity.notFound().build();
+        } else {
+            Optional<User> existingUser = userService.findById(user.getId());
+            if (existingUser.isPresent()) {
+                userService.update(user);
+                response = ResponseEntity.ok().build();
+            } else {
+                response = ResponseEntity.notFound().build();
+            }
+        }
+        return response;
+    }
+
+    @PatchMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void change(@RequestBody User user) {
+        userService.update(user);
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long userId) {
+        try {
+            userService.deleteById(userId);
+            return ResponseEntity.ok().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+}
