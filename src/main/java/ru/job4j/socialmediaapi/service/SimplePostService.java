@@ -32,23 +32,28 @@ public class SimplePostService implements PostService {
 
     @Transactional
     @Override
-    public Post update(Post updatedPost, FileDto image) {
-        Post currentPost = postRepository.findById(updatedPost.getId())
-                .orElseThrow(() -> new IllegalArgumentException("Пост с id=" + updatedPost.getId() + " не найден"));
-        currentPost.setTitle(updatedPost.getTitle());
-        currentPost.setText(updatedPost.getText());
-        if (image != null) {
-            currentPost.setFile(fileService.save(image));
+    public boolean update(Post updatedPost, FileDto image) {
+        boolean result;
+        Optional<Post> optionalPost = postRepository.findById(updatedPost.getId());
+        if (optionalPost.isEmpty()) {
+            result = false;
+        } else {
+            Post currentPost = optionalPost.get();
+            if (image != null) {
+                currentPost.setFile(fileService.save(image));
+            }
+            currentPost.setTitle(updatedPost.getTitle());
+            currentPost.setText(updatedPost.getText());
+            postRepository.save(currentPost);
+            result = true;
         }
-        return postRepository.save(currentPost);
+        return result;
     }
 
     @Transactional
     @Override
-    public void deletePostById(Long id) {
-        Post post = postRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Пост с id=" + id + " не найден"));
-        postRepository.delete(post);
+    public boolean deletePostById(Long id) {
+        return postRepository.deletePostById(id) > 1;
     }
 
     @Override

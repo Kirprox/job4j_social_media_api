@@ -12,8 +12,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.job4j.socialmediaapi.model.User;
 import ru.job4j.socialmediaapi.service.UserService;
 
-import java.util.Optional;
-
 @Validated
 @Slf4j
 @AllArgsConstructor
@@ -47,20 +45,10 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<Void> update(@RequestBody User user) {
-        ResponseEntity<Void> response;
-
-        if (user.getId() == null) {
-            response = ResponseEntity.notFound().build();
-        } else {
-            Optional<User> existingUser = userService.findById(user.getId());
-            if (existingUser.isPresent()) {
-                userService.update(user);
-                response = ResponseEntity.ok().build();
-            } else {
-                response = ResponseEntity.notFound().build();
-            }
+        if (userService.update(user)) {
+            return ResponseEntity.ok().build();
         }
-        return response;
+        return ResponseEntity.notFound().build();
     }
 
     @PatchMapping
@@ -71,11 +59,9 @@ public class UserController {
 
     @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deleteById(@PathVariable Long userId) {
-        try {
-            userService.deleteById(userId);
-            return ResponseEntity.ok().build();
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
+        if (userService.deleteById(userId)) {
+            return ResponseEntity.noContent().build();
         }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 }

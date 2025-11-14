@@ -45,14 +45,10 @@ public class PostController {
 
     @PutMapping
     public ResponseEntity<Void> update(@RequestBody Post post) {
-        ResponseEntity<Void> response;
-        try {
-            postService.update(post, null);
-            response = ResponseEntity.ok().build();
-        } catch (IllegalArgumentException e) {
-            response = ResponseEntity.notFound().build();
+        if (postService.update(post, null)) {
+            return ResponseEntity.ok().build();
         }
-        return response;
+        return ResponseEntity.notFound().build();
     }
 
     @PatchMapping
@@ -63,14 +59,9 @@ public class PostController {
 
     @DeleteMapping("/{postId}")
     public ResponseEntity<Void> deleteById(@PathVariable Long postId) {
-        ResponseEntity<Void> response;
-        try {
-            postService.deletePostById(postId);
-            response = ResponseEntity.ok().build();
-        } catch (IllegalArgumentException e) {
-            response = ResponseEntity.notFound().build();
+        if (postService.deletePostById(postId)) {
+            return ResponseEntity.noContent().build();
         }
-        return response;
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
-
 }

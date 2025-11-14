@@ -19,20 +19,17 @@ public class SimpleUserService implements UserService {
     }
 
     @Override
-    public User update(User user) {
-        User existingUser = repository.findById(user.getId())
-                .orElseThrow(() -> new IllegalArgumentException("Пользователь не найден"));
-        existingUser.setFullName(user.getFullName());
-        existingUser.setEmail(user.getEmail());
-        existingUser.setPassword(user.getPassword());
-        return repository.save(existingUser);
+    public boolean update(User user) {
+        return repository.update(user) > 0L;
     }
 
     @Override
-    public void deleteById(Long id) {
-        User user = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Пользователь не найден"));
-        repository.deleteById(id);
+    public boolean deleteById(Long id) {
+        boolean result = repository.existsById(id);
+        if (result) {
+            repository.deleteById(id);
+        }
+        return result;
     }
 
     @Override

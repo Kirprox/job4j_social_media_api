@@ -9,9 +9,9 @@ import java.util.Optional;
 public interface PostService {
     Post save(Post post, FileDto image);
 
-    Post update(Post updatedPost, FileDto image);
+    boolean update(Post updatedPost, FileDto image);
 
-    void deletePostById(Long id);
+    boolean deletePostById(Long id);
 
     Optional<Post> findById(Long id);
 

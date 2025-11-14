@@ -8,9 +8,9 @@ import java.util.Optional;
 public interface UserService {
     User save(User user);
 
-    User update(User user);
+    boolean update(User user);
 
-    void deleteById(Long id);
+    boolean deleteById(Long id);
 
     Optional<User> findById(Long id);
 
