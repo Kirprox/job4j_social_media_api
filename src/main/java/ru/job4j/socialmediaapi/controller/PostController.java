@@ -52,9 +52,11 @@ public class PostController {
     }
 
     @PatchMapping
-    @ResponseStatus(HttpStatus.OK)
-    public void change(@RequestBody Post post) {
-        postService.update(post, null);
+    public ResponseEntity<Void> change(@RequestBody Post post) {
+        if (postService.update(post, null)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{postId}")
