@@ -46,7 +46,7 @@ class PostRepositoryTest {
         user = new User();
         user.setFullName("John Doe");
         user.setEmail("john@example.com");
-        user.setPassword("12345");
+        user.setPassword("password1234567");
         userRepository.save(user);
 
         file = new File();

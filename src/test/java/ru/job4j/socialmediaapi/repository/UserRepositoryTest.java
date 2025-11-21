@@ -44,7 +44,7 @@ class UserRepositoryTest {
         var user = new User();
         user.setFullName("John Doe");
         user.setEmail("john@example.com");
-        user.setPassword("12345");
+        user.setPassword("password1234567");
 
         userRepository.save(user);
         var found = userRepository.findById(user.getId());
@@ -59,7 +59,7 @@ class UserRepositoryTest {
         var user = new User();
         user.setFullName("Alice");
         user.setEmail("alice@example.com");
-        user.setPassword("pass");
+        user.setPassword("password1234567");
         userRepository.save(user);
 
         user.setFullName("Alice Updated");
@@ -75,11 +75,11 @@ class UserRepositoryTest {
         var u1 = new User();
         u1.setFullName("User1");
         u1.setEmail("u1@example.com");
-        u1.setPassword("123");
+        u1.setPassword("password1234567");
         var u2 = new User();
         u2.setFullName("User2");
         u2.setEmail("u2@example.com");
-        u2.setPassword("456");
+        u2.setPassword("password1234567");
 
         userRepository.save(u1);
         userRepository.save(u2);

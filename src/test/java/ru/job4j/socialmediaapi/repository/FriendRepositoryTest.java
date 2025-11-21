@@ -43,19 +43,19 @@ class FriendRepositoryTest {
     void initUsers() {
         user1 = new User();
         user1.setEmail("user1@mail.com");
-        user1.setPassword("pass1");
+        user1.setPassword("password1234567");
         user1.setFullName("User1");
         userRepository.save(user1);
 
         user2 = new User();
         user2.setEmail("user2@mail.com");
-        user2.setPassword("pass2");
+        user2.setPassword("password1234567");
         user2.setFullName("User2");
         userRepository.save(user2);
 
         user3 = new User();
         user3.setEmail("user3@mail.com");
-        user3.setPassword("pass3");
+        user3.setPassword("password1234567");
         user3.setFullName("User3");
         userRepository.save(user3);
     }
@@ -68,9 +68,9 @@ class FriendRepositoryTest {
         fileRepository.deleteAll();
         userRepository.deleteAll();
 
-        user1 = userRepository.save(new User(null, "User1", "user1@mail.com", "pass1", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
-        user2 = userRepository.save(new User(null, "User2", "user2@mail.com", "pass2", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
-        user3 = userRepository.save(new User(null, "User3", "user3@mail.com", "pass3", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+        user1 = userRepository.save(new User(null, "User1", "user1@mail.com", "password1234567", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+        user2 = userRepository.save(new User(null, "User2", "user2@mail.com", "password1234567", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+        user3 = userRepository.save(new User(null, "User3", "user3@mail.com", "password1234567", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
     }
 
     @Test

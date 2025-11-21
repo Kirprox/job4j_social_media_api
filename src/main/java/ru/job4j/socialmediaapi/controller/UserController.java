@@ -1,5 +1,6 @@
 package ru.job4j.socialmediaapi.controller;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> save(@RequestBody User user) {
+    public ResponseEntity<User> save(@Valid @RequestBody User user) {
         userService.save(user);
         var uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -44,7 +45,7 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody User user) {
+    public ResponseEntity<Void> update(@Valid @RequestBody User user) {
         if (userService.update(user)) {
             return ResponseEntity.ok().build();
         }
@@ -52,7 +53,7 @@ public class UserController {
     }
 
     @PatchMapping
-    public ResponseEntity<Void> change(@RequestBody User user) {
+    public ResponseEntity<Void> change(@Valid @RequestBody User user) {
         if (userService.update(user)) {
             return ResponseEntity.ok().build();
         }
@@ -60,7 +61,9 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long userId) {
+    public ResponseEntity<Void> deleteById(@NotNull(message = "id не может быть null")
+                                           @Min(value = 1, message = "id должен быть больше или равен 1")
+                                           @PathVariable Long userId) {
         if (userService.deleteById(userId)) {
             return ResponseEntity.noContent().build();
         }

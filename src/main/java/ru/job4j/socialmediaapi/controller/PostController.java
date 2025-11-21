@@ -1,5 +1,6 @@
 package ru.job4j.socialmediaapi.controller;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -31,7 +32,7 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<Post> save(@RequestBody Post post) {
+    public ResponseEntity<Post> save(@Valid @RequestBody Post post) {
         Post savedPost = postService.save(post, null);
         var uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -44,7 +45,7 @@ public class PostController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> update(@RequestBody Post post) {
+    public ResponseEntity<Void> update(@Valid @RequestBody Post post) {
         if (postService.update(post, null)) {
             return ResponseEntity.ok().build();
         }
@@ -52,7 +53,7 @@ public class PostController {
     }
 
     @PatchMapping
-    public ResponseEntity<Void> change(@RequestBody Post post) {
+    public ResponseEntity<Void> change(@Valid @RequestBody Post post) {
         if (postService.update(post, null)) {
             return ResponseEntity.ok().build();
         }
@@ -60,7 +61,9 @@ public class PostController {
     }
 
     @DeleteMapping("/{postId}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long postId) {
+    public ResponseEntity<Void> deleteById(@NotNull(message = "id не может быть null")
+                                           @Min(value = 1, message = "id должен быть больше или равен 1")
+                                           @PathVariable Long postId) {
         if (postService.deletePostById(postId)) {
             return ResponseEntity.noContent().build();
         }
