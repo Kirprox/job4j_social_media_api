@@ -52,4 +52,6 @@ public interface PostRepository extends CrudRepository<Post, Long> {
                 )
             ORDER BY post.created DESC""")
     Page<Post> findPostsOfSubscriptions(@Param("id") Long userId, Pageable pageable);
+
+    List<Post> findByUserId(Long userId);
 }

@@ -65,4 +65,9 @@ public class SimplePostService implements PostService {
     public List<Post> findAll() {
         return postRepository.findAll(Pageable.unpaged()).getContent();
     }
+
+    @Override
+    public List<Post> findPostsByUserId(Long id) {
+        return postRepository.findByUserId(id);
+    }
 }
