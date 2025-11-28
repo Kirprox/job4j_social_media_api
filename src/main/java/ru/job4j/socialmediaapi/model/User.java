@@ -1,6 +1,7 @@
 package ru.job4j.socialmediaapi.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -17,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "social_user")
+@Schema(description = "User Model Information")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +27,7 @@ public class User {
     @Length(min = 2,
             max = 15,
             message = "fullName должно быть не менее 2 и не более 15 символов")
+    @Schema(description = "UserName title", example = "Mediator")
     private String fullName;
     @NotBlank(message = "email не может быть пустым")
     @Email

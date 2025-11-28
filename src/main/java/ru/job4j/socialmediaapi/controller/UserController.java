@@ -1,5 +1,11 @@
 package ru.job4j.socialmediaapi.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -13,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.job4j.socialmediaapi.model.User;
 import ru.job4j.socialmediaapi.service.UserService;
 
+@Tag(name = "UserController", description = "UserController management APIs")
 @Validated
 @Slf4j
 @AllArgsConstructor
@@ -21,6 +28,13 @@ import ru.job4j.socialmediaapi.service.UserService;
 public class UserController {
     private final UserService userService;
 
+    @Operation(
+            summary = "Retrieve a User by userId",
+            description = "Get a User object by specifying its userId. The response is User object with userId, username and date of created.",
+            tags = {"User", "get"})
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = User.class), mediaType = "application/json")}),
+            @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema())})})
     @GetMapping("/{userId}")
     public ResponseEntity<User> get(@PathVariable("userId")
                                     @NotNull
@@ -31,6 +45,10 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @Operation(
+            summary = "Create a new User",
+            description = ""
+    )
     @PostMapping
     public ResponseEntity<User> save(@Valid @RequestBody User user) {
         userService.save(user);
