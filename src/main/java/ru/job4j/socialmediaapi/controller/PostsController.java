@@ -66,7 +66,7 @@ public class PostsController {
         for (Long id : idList) {
             User currentUser = userService.findById(id).get();
             List<Post> posts = postService.findPostsByUserId(id);
-            result.add(new PostDto(id, currentUser.getFullName(), posts));
+            result.add(new PostDto(id, currentUser.getUserName(), posts));
         }
         return result;
     }

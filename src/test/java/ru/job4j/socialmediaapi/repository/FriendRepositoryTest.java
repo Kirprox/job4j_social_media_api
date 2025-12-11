@@ -44,19 +44,19 @@ class FriendRepositoryTest {
         user1 = new User();
         user1.setEmail("user1@mail.com");
         user1.setPassword("password1234567");
-        user1.setFullName("User1");
+        user1.setUserName("User1");
         userRepository.save(user1);
 
         user2 = new User();
         user2.setEmail("user2@mail.com");
         user2.setPassword("password1234567");
-        user2.setFullName("User2");
+        user2.setUserName("User2");
         userRepository.save(user2);
 
         user3 = new User();
         user3.setEmail("user3@mail.com");
         user3.setPassword("password1234567");
-        user3.setFullName("User3");
+        user3.setUserName("User3");
         userRepository.save(user3);
     }
 

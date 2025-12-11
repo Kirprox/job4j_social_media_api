@@ -43,12 +43,12 @@ class SubscriberRepositoryTest {
         userRepository.deleteAll();
 
         u1 = new User();
-        u1.setFullName("User One");
+        u1.setUserName("User One");
         u1.setEmail("user1@example.com");
         u1.setPassword("password1234567");
 
         u2 = new User();
-        u2.setFullName("User Two");
+        u2.setUserName("User Two");
         u2.setEmail("user2@example.com");
         u2.setPassword("password1234567");
 

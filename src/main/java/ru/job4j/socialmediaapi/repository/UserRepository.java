@@ -19,7 +19,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("""
             update User u
-            set u.fullName = :#{#user.fullName},
+            set u.userName = :#{#user.userName},
             u.email = :#{#user.email},
             u.password = :#{#user.password}
             where u.id=:#{#user.id}
@@ -29,4 +29,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("delete from User u where u.id=:pId")
     int delete(@Param("pId") Long id);
+
+    Optional<User> findByUserName(String userName);
+
+    Boolean existsByEmail(String email);
+
+    Boolean existsByUserName(String username);
 }

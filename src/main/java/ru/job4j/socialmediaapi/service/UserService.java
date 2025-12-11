@@ -1,6 +1,8 @@
 package ru.job4j.socialmediaapi.service;
 
 import ru.job4j.socialmediaapi.model.User;
+import ru.job4j.socialmediaapi.security.dtos.request.SignupRequestDTO;
+import ru.job4j.socialmediaapi.security.dtos.response.RegisterDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,4 +17,6 @@ public interface UserService {
     Optional<User> findById(Long id);
 
     List<User> findAll();
+
+    RegisterDTO signUp(SignupRequestDTO signUpRequest);
 }

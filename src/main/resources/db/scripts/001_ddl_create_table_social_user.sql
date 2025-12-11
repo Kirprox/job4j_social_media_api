@@ -1,7 +1,7 @@
 CREATE TABLE social_user
 (
     id        SERIAL PRIMARY KEY,
-    full_name VARCHAR        NOT NULL,
-    email     VARCHAR UNIQUE NOT NULL,
-    password  VARCHAR        NOT NULL
+    username  VARCHAR(50) UNIQUE NOT NULL,
+    email     VARCHAR(20) UNIQUE NOT NULL,
+    password  VARCHAR(120)       NOT NULL
 );
